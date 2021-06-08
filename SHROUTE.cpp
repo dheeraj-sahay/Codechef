@@ -1,149 +1,71 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-long long int route(int a[], long long int bi, long long int a_size){
-    long long int right, left;      // right -> 2  left -> 1
-    long long int limit_r, limit_l, min_r = 0, min_l = 0;
-//    a_size = a_size - 1;
-//    limit = a_size - bi;
-//    if(limit >= bi){ limit = limit;}else{limit = bi;}
-//    long long int limit_max = __max(a_size-bi, bi);
-//    if(a_size - bi > bi){ limit_r = a_size-bi; limit_l = bi; }else{ limit_l = a_size-bi; limit_r = bi; }
-    limit_r = a_size - bi;
-    limit_l = bi;
-
-    for(long long int i = 1; i <= limit_r; i++){
-        if(a[bi+i] == 2){
-            min_r = i;
-            break;
-        }
-    }
-
-    for(long long int i = 1; i <= limit_l; i++){
-        if(a[bi-i] == 1){
-            min_l = i;
-            break;
-        }
-    }
-
-    if(min_r == 0 && min_l == 0){ return -1; }
-    else if(min_r == 0 || min_l == 0){ return __max(min_r, min_l);}
-    else{ return __min(min_r, min_l);}
-
-/*     for(long long int min = 1; min <= limit; min++){
-        right = bi + min;
-        left = bi - min;
-        if(right <= a_size && a[right] == 2){ return min;}
-        if(left >= 0 && a[left] == 1){ return min;}
-    } */
-
-}
-/* 
+using ll = long long int;
 int main(void){
-    ios::sync_with_stdio(false);    cin.tie(0);     cout.tie(0);
-
-    long long int T, N, M;
-
-    cin >> T;
-
-    while(T){
-        cin>>N>>M;
-        int B[M];
-        int A[N];
-        //input 
-        for(long long int i = 0; i<N; i++){
-            cin>>A[i];
+    ios::sync_with_stdio(false);    cin.tie(0);
+    cout.tie(0);
+    ll t, n, m; 
+    cin>>t;
+    while(t){
+        cin>>n>>m;
+        ll a[n];
+        ll b[m];
+        for(ll i = 0; i<n; i++){
+            cin>>a[i];
         }
-
-        for(long long int i=0; i<M; i++){
-            cin>>B[i];
+        for(ll i=0; i<m; i++){
+            cin>>b[i];
         }
-        
-        //sol
-        long long int n = N-1;
-        for(long long int i = 0; i < M; i++){
-            long long int result = 0;
-            //long long int l = 0, right = 0, left = 0;
-            long long int s = B[i] - 1; 
-            if(A[s] == 0){
-                long long int right, left;      // right -> 2  left -> 1
-                long long int limit_r, limit_l, min_r = 0, min_l = 0;
-                limit_r = n - s;
-                limit_l = s;
+        vector<ll> r, l;    // r->1  l->2
+        int one = -1, two = -1;
+        int mx = 1e9;
 
-                for(long long int j = 1; j <= limit_r; j++){
-                    if(A[s+j] == 2){
-                        min_r = j;
-                        break;
-                    }
-                }
-
-                for(long long int j = 1; j <= limit_l; j++){
-                    if(A[s-j] == 1){
-                        min_l = j;
-                        break;
-                    }
-                }
-
-                if(min_r == 0 && min_l == 0){ result = -1; }
-                else if(min_r == 0 || min_l == 0){ result = __max(min_r, min_l);}
-                else{ result = __min(min_r, min_l);}
-               // result = route(A, s, N-1);
-              //   (N-s > s)? l = N-s: l = s;
-              //  for(long long int x = 1; x < l; x++){
-              //      right = s + x;      left = s - x;
-              //      if(right < N && A[right-1] == 2){ result = x; cout<<result; break; }
-              //      if( left >= 0 && A[left+1] == 1){ result = x; cout<<result; break; }
-              //   } 
-                
-
+        for(ll i = 0; i<n; i++){
+            if(a[i] == 1){
+                r.push_back(0);
+                one = i;
+            }else if(one == -1){
+                r.push_back(mx);
+            }else if(a[i] == 2){
+                r.push_back(0);
             }else{
-                result = 0;
+                r.push_back(i-one);
             }
-        //output
-            cout<<result<<" ";
         }
+
+        for(ll i = n-1; i>= 0; i--){
+            if(a[i] == 2){
+                l.push_back(0);
+                two = i;
+            }else if(two == -1 && a[i] == 0){
+                l.push_back(mx);
+            }else if(a[i] == 1){
+                l.push_back(0);
+            }else{
+                l.push_back(two-i);
+            }
+        }
+
+        reverse(l.begin(), l.end());
+
+        for(ll i = 0; i < m; i++){
+            ll cur = b[i];
+            if(a[0]!=0 && a[cur-1] != 0){
+                cout<<"0"<<" ";
+            }else if(cur == 1){
+                cout << "0" << " ";
+            }else{
+                int ans = 0;
+                if(r[cur-1] == mx && l[cur-1] == mx){
+                    ans = -1;
+                }else{
+                    ans = min(r[cur-1], l[cur-1]);
+                }
+                cout << ans << " ";
+            }
+        }
+
         cout<<endl;
-        T--;
+        t--;
     }
-} */
-
-int main(void){
-    ios::sync_with_stdio(false);    cin.tie(0);     cout.tie(0);
-
-    long long int T, N, M;
-
-    cin >> T;
-
-    while(T){
-        int num;
-        long long int num1, l = 0, r = 0;
-        vector<int>a;
-        vector<long long int>b;
-        vector<long long int>left;      left[0] = 0;
-        vector<long long int>right;     right[0] = 0;
-        for(long long int i = 0; i<N; i++){
-            cin>>num;
-            a.push_back(num);
-            if(true){
-                if(num == 1){
-                    l = 0;
-                }else{
-                    l = l+1;
-                }
-                left.push_back(l);
-            }
-            if(true){
-                if(num == 2){
-                    r = 0;
-                }else{
-                    r = r+1;
-                }
-                right.push_back(r);
-            }
-        }
-        T--;
-    }
-
-    return 0;
 }
