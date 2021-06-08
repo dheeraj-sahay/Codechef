@@ -40,7 +40,7 @@ long long int route(int a[], long long int bi, long long int a_size){
 }
 
 int main(void){
-    ios::sync_with_stdio(false);    cin.tie(0);
+    ios::sync_with_stdio(false);    cin.tie(0);     cout.tie(0);
 
     long long int T, N, M;
 
