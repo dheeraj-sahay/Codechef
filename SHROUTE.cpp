@@ -38,7 +38,7 @@ long long int route(int a[], long long int bi, long long int a_size){
     } */
 
 }
-
+/* 
 int main(void){
     ios::sync_with_stdio(false);    cin.tie(0);     cout.tie(0);
 
@@ -89,12 +89,12 @@ int main(void){
                 else if(min_r == 0 || min_l == 0){ result = __max(min_r, min_l);}
                 else{ result = __min(min_r, min_l);}
                // result = route(A, s, N-1);
-                /* (N-s > s)? l = N-s: l = s;
-                for(long long int x = 1; x < l; x++){
-                    right = s + x;      left = s - x;
-                    if(right < N && A[right-1] == 2){ result = x; cout<<result; break; }
-                    if( left >= 0 && A[left+1] == 1){ result = x; cout<<result; break; }
-                } */
+              //   (N-s > s)? l = N-s: l = s;
+              //  for(long long int x = 1; x < l; x++){
+              //      right = s + x;      left = s - x;
+              //      if(right < N && A[right-1] == 2){ result = x; cout<<result; break; }
+              //      if( left >= 0 && A[left+1] == 1){ result = x; cout<<result; break; }
+              //   } 
                 
 
             }else{
@@ -106,4 +106,44 @@ int main(void){
         cout<<endl;
         T--;
     }
+} */
+
+int main(void){
+    ios::sync_with_stdio(false);    cin.tie(0);     cout.tie(0);
+
+    long long int T, N, M;
+
+    cin >> T;
+
+    while(T){
+        int num;
+        long long int num1, l = 0, r = 0;
+        vector<int>a;
+        vector<long long int>b;
+        vector<long long int>left;      left[0] = 0;
+        vector<long long int>right;     right[0] = 0;
+        for(long long int i = 0; i<N; i++){
+            cin>>num;
+            a.push_back(num);
+            if(true){
+                if(num == 1){
+                    l = 0;
+                }else{
+                    l = l+1;
+                }
+                left.push_back(l);
+            }
+            if(true){
+                if(num == 2){
+                    r = 0;
+                }else{
+                    r = r+1;
+                }
+                right.push_back(r);
+            }
+        }
+        T--;
+    }
+
+    return 0;
 }
